@@ -5,4 +5,5 @@ urlpatterns = [
     path('',views.getFixtures),
     path('',views.getLeague),
     path('',views.getStandings),
+    path('',views.getTeams),
 ]
