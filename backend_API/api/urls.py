@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.getFixtures),
-    path('',views.getLeague),
-    path('',views.getStandings),
-    path('',views.getTeams),
+    path('fixtures',views.getFixtures),
+    path('league',views.getLeague),
+    path('standings',views.getStandings),
+    path('teams',views.getTeams),
+    path('statistics',views.getFixturesStatistics),
+    path('events',views.getFixturesEvents)
 ]
