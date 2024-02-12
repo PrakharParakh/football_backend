@@ -7,5 +7,6 @@ urlpatterns = [
     path('standings',views.getStandings),
     path('teams',views.getTeams),
     path('statistics',views.getFixturesStatistics),
-    path('events',views.getFixturesEvents)
+    path('events',views.getFixturesEvents),
+    path('daily-quiz', views.dailyQuiz)
 ]
