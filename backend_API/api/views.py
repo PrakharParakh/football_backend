@@ -203,6 +203,108 @@ def getFixturesEvents(request):
         return Response({"message": f"Request error: {str(e)}"}, status=500)
 
 @api_view(['GET'])
+def getHeadToHead(request):
+    api_url = "https://v3.football.api-sports.io/fixtures/headtohead"
+    try:
+        # Get user-defined query parameters from the request
+        params = request.GET
+
+        # Append user-defined parameters to the API URL
+        api_url += "?" + "&".join([f"{key}={value}" for key, value in params.items()])
+        
+        # Define custom headers
+        headers = {
+            'x-rapidapi-key': '87e65c940821f0c5c7c6af99224cfc4d',
+            'x-rapidapi-host': 'v3.football.api-sports.io'
+        }
+
+        # Make a GET request to the external API with custom headers
+        response = requests.get(api_url, headers=headers)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Get the JSON data from the response
+            data_from_api = response.json()
+
+            # Return the fetched data as the API response
+            return Response(data_from_api)
+        else:
+            # If the request was not successful, return an error response
+            return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
+
+    except requests.RequestException as e:
+        # Handle exceptions (e.g., connection error, timeout)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
+
+@api_view(['GET'])
+def getLineup(request):
+    api_url = "https://v3.football.api-sports.io/fixtures/lineups"
+    try:
+        # Get user-defined query parameters from the request
+        params = request.GET
+
+        # Append user-defined parameters to the API URL
+        api_url += "?" + "&".join([f"{key}={value}" for key, value in params.items()])
+        
+        # Define custom headers
+        headers = {
+            'x-rapidapi-key': '87e65c940821f0c5c7c6af99224cfc4d',
+            'x-rapidapi-host': 'v3.football.api-sports.io'
+        }
+
+        # Make a GET request to the external API with custom headers
+        response = requests.get(api_url, headers=headers)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Get the JSON data from the response
+            data_from_api = response.json()
+
+            # Return the fetched data as the API response
+            return Response(data_from_api)
+        else:
+            # If the request was not successful, return an error response
+            return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
+
+    except requests.RequestException as e:
+        # Handle exceptions (e.g., connection error, timeout)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
+
+@api_view(['GET'])
+def getPredictions(request):
+    api_url = "https://v3.football.api-sports.io/predictions"
+    try:
+        # Get user-defined query parameters from the request
+        params = request.GET
+
+        # Append user-defined parameters to the API URL
+        api_url += "?" + "&".join([f"{key}={value}" for key, value in params.items()])
+        
+        # Define custom headers
+        headers = {
+            'x-rapidapi-key': '87e65c940821f0c5c7c6af99224cfc4d',
+            'x-rapidapi-host': 'v3.football.api-sports.io'
+        }
+
+        # Make a GET request to the external API with custom headers
+        response = requests.get(api_url, headers=headers)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Get the JSON data from the response
+            data_from_api = response.json()
+
+            # Return the fetched data as the API response
+            return Response(data_from_api)
+        else:
+            # If the request was not successful, return an error response
+            return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
+
+    except requests.RequestException as e:
+        # Handle exceptions (e.g., connection error, timeout)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
+
+@api_view(['GET'])
 def dailyQuiz(request):
     if request.method == 'GET':
         # Get the current day of the week (Monday=0, Sunday=6)
@@ -282,5 +384,3 @@ def dailyQuiz(request):
             return Response(data[day_index - 1], status=200)
         else:
             return Response({"message": "No quiz available for today"}, status=404)
-
-
