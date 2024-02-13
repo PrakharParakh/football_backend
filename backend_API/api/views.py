@@ -23,7 +23,9 @@ def getFixtures(request):
         # Try to get data from cache first
         cached_data = cache.get(api_url)
         if cached_data:
+            print("Hit")
             return Response(cached_data)
+        print("Missed")
 
         # Define custom headers
         headers = {
@@ -66,7 +68,9 @@ def getLeague(request):
         # Try to get data from cache first
         cached_data = cache.get(api_url)
         if cached_data:
+            print("Hit")
             return Response(cached_data)
+        print("Missed")
 
         # Define custom headers
         headers = {
@@ -82,16 +86,18 @@ def getLeague(request):
             # Get the JSON data from the response
             data_from_api = response.json()
 
+            # Store data in cache
+            cache.set(api_url, data_from_api, timeout=settings.CACHE_TTL)
+
             # Return the fetched data as the API response
             return Response(data_from_api)
         else:
-
             # If the request was not successful, return an error response
             return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
 
     except requests.RequestException as e:
         # Handle exceptions (e.g., connection error, timeout)
-        return Response({"message": f"Request error: {str(e)}"}, status=500)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
 
 @api_view(['GET'])
 def getStandings(request):
@@ -107,7 +113,9 @@ def getStandings(request):
         # Try to get data from cache first
         cached_data = cache.get(api_url)
         if cached_data:
+            print("Hit")
             return Response(cached_data)
+        print("Missed")
 
         # Define custom headers
         headers = {
@@ -123,16 +131,18 @@ def getStandings(request):
             # Get the JSON data from the response
             data_from_api = response.json()
 
+            # Store data in cache
+            cache.set(api_url, data_from_api, timeout=settings.CACHE_TTL)
+
             # Return the fetched data as the API response
             return Response(data_from_api)
         else:
-
             # If the request was not successful, return an error response
             return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
 
     except requests.RequestException as e:
         # Handle exceptions (e.g., connection error, timeout)
-        return Response({"message": f"Request error: {str(e)}"}, status=500)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
 
 @api_view(['GET'])
 def getTeams(request):
@@ -148,7 +158,9 @@ def getTeams(request):
         # Try to get data from cache first
         cached_data = cache.get(api_url)
         if cached_data:
+            print("Hit")
             return Response(cached_data)
+        print("Missed")
 
         # Define custom headers
         headers = {
@@ -164,16 +176,18 @@ def getTeams(request):
             # Get the JSON data from the response
             data_from_api = response.json()
 
+            # Store data in cache
+            cache.set(api_url, data_from_api, timeout=settings.CACHE_TTL)
+
             # Return the fetched data as the API response
             return Response(data_from_api)
         else:
-
             # If the request was not successful, return an error response
             return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
 
     except requests.RequestException as e:
         # Handle exceptions (e.g., connection error, timeout)
-        return Response({"message": f"Request error: {str(e)}"}, status=500)
+        return Response({"message": f"Request error: {str(e)}"}, status=500)  # Return a server error status
 
 @api_view(['GET'])
 def getFixturesStatistics(request):
