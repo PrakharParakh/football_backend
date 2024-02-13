@@ -24,9 +24,7 @@ SECRET_KEY = 'django-insecure-d*4fz)-dcpsal)r-@7k4&drv(e#x%15c5(d804397p!)$!km35
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -81,6 +79,19 @@ DATABASES = {
     }
 }
 
+# Caching data which will exist for this much time limit. After 60*1500 it will be destroyed.
+CACHE_TTL = 60 * 1500
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "example"
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
