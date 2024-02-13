@@ -43,7 +43,7 @@ def getFixtures(request):
             cache.set(api_url, data_from_api, timeout=settings.CACHE_TTL)
 
             # Return the fetched data as the API response
-            return Response(data_from_api, safe=False)
+            return Response(data_from_api)
         else:
             # If the request was not successful, return an error response
             return Response({"message": "Failed to fetch data from the API"}, status=response.status_code)
@@ -214,7 +214,7 @@ def getFixturesStatistics(request):
 @api_view(['GET'])
 def getFixturesEvents(request):
     api_url = "https://v3.football.api-sports.io/fixtures/events"
-    
+
     try:
         # Get user-defined query parameters from the request
         params = request.GET
