@@ -443,3 +443,25 @@ def dailyQuiz(request):
             return Response(data[day_index - 1], status=200)
         else:
             return Response({"message": "No quiz available for today"}, status=404)
+
+@api_view(['GET'])
+def news(request):
+    if request.method == 'GET':
+
+        # List of news
+        data = [{
+            "img": "https://metro.co.uk/wp-content/uploads/2024/04/GettyImages-2150441437.jpg?quality=90&strip=all&zoom=1&resize=644%2C442",
+            "title": "Tottenham vs Arsenal"
+        },
+        {
+           "img": "https://i2-prod.mirror.co.uk/sport/football/news/article32684655.ece/ALTERNATES/s1200d/0_GettyImages-2150416267.jpg",
+            "title": "Mo Salah vs Jurgen Klopp bust-up divides opinion as Jamie Carragher and Alan Shearer disagree"
+        }, 
+        {
+            "img": "https://staticg.sportskeeda.com/editor/2024/04/2b684-17142881925203-1920.jpg",
+            "title": "Messi magic"
+        }
+        ]
+        
+        return Response(data, status=200)
+        

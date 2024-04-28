@@ -11,5 +11,6 @@ urlpatterns = [
     path('head-to-head',views.getHeadToHead),
     path('lineup',views.getLineup),
     path('predictions',views.getPredictions),
-    path('daily-quiz', views.dailyQuiz)
+    path('daily-quiz', views.dailyQuiz),
+    path('news', views.news)
 ]
